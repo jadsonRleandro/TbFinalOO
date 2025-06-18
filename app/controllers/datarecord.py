@@ -146,12 +146,12 @@ class dataBase():
 
     @classmethod
     def load(cls):
-        with open("app/controllers/db/user_accounts.json", "r") as file:
+        with open("app/controllers/db/users.json", "r") as file:
             cls.__dataB = json.load(file)
 
     @classmethod
     def save(cls):
-        with open("app/controllers/db/user_accounts.json", "w") as file:
+        with open("app/controllers/db/users.json", "w") as file:
             json.dump(cls.__dataB, file, indent=4)
 
 
@@ -186,4 +186,3 @@ class dataBase():
             return "Usuario Adicionado"
         else:
             return "Usuario Ja Existe"
-
