@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>menu</title>
+    <link rel="stylesheet" href="/static/css/menu.css">
+</head>
+
+<body>
+    <div id="load">
+        <h1>Bem Vindo</h1>
+        <h1>{{username}}</h1>
+    </div>
+
+
+    <div id='menu'>
+    </div>
+
+
+    <div id="userInfos">
+        <input onclick="openMenu()" type="button" id="avatar" src="">
+        <h1 id="username">{{username}}</h1>
+    </div>
+    <div id="options">
+        <p onclick="selectOpiton('pv', this)" class="select" id="">Privado</p>
+        <p onclick="selectOpiton('pb', this)">Publico</p>
+    </div>
+    <input id="search" type="text" placeholder="Pesquisar">
+
+    <div id = 'musicsContainer'>
+        % for music in allmusics:
+            <div class="musics public">
+                <img class="musicImg">
+                <div class="musicInfos">
+                    <p class="musicName">{{music['name']}}</p>
+                    <p class="artist">{{music['artist']}}</p>
+                </div>
+                <div onclick="play(this)" class="playBtn"><img class="playIcon" src="/static/assets/playIcon.png"></div>
+            </div>
+        % end
+        % for music in userMusic:
+            <div class="musics private">
+                <img class="musicImg">
+                <div class="musicInfos">
+                    <p class="musicName">{{music['name']}}</p>
+                    <p class="artist">{{music['artist']}}</p>
+                </div>
+                <div onclick="play(this)" class="playBtn"><img class="playIcon" src="/static/assets/playIcon.png"></div>
+            </div>
+        % end
+    </div>
+    <div id="footer">
+        <div id="actMusicInfos">
+            <p class="musicName">Nome da Musica</p>
+            <p class="artist">nome do artista</p>
+        </div>
+        <div id="controllers">
+            <input type="button" class="arrows rotate180">
+            <div onclick="play(this)" class="playBtn">
+                <img id="actBtn" class="playIcon" src="/static/assets/playIcon.png">
+            </div>
+            <input type="button" class="arrows">
+        </div>
+    </div>
+
+    <script src="/static/js/menu.js"></script>
+</body>
+
+</html>

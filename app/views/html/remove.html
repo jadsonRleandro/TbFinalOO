@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/remove.css">
+</head>
+
+<body>
+    <form action="/menu" method="get" id="options">
+        <img onclick="returnToMenu()" src="/static/assets/arrow.png" id="backToMenu">
+        <img onclick="rm()" src="/static/assets/trash.png" id = "trash">
+    </form>
+
+    <div id = 'musicsContainer'>
+        % for music in musicDb:
+            <div class="musics">
+                <div onclick="select(this)" class="square"></div>
+                <img class="musicImg">
+                <div class="musicInfos">
+                    <p class="musicName">{{music['name']}}</p>
+                    <p class="artist">{{music['artist']}}</p>
+                </div>
+            </div>
+        % end
+            
+
+    </div>
+    <script src="/static/js/remove.js"></script>
+</body>
+
+</html>

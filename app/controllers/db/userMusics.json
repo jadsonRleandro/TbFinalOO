@@ -1,0 +1,22 @@
+[
+    {
+        "user": "teste",
+        "musics": 
+        [
+            {
+                "name": "musica do usuario",
+                "artist": "um alguem"
+            }
+        ]
+    },
+    {
+        "user": "sla",
+        "musics": 
+        [
+            {
+                "name": "musica do outro",
+                "artist": "um alguem"
+            }
+        ]
+    }
+]

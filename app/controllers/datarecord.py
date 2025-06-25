@@ -186,3 +186,43 @@ class dataBase():
             return "Usuario Adicionado"
         else:
             return "Usuario Ja Existe"
+
+    @classmethod
+    def verificarLogin(cls, user, password):
+        with open("app/controllers/db/users.json", "r") as file:
+            cls.__dataB = json.load(file)
+        for loginGet in cls.__dataB:
+            print(f"Comparando entrada: {user}/{password} com {loginGet.get('name')}/{loginGet.get('password')}")
+            if user == loginGet.get('name') and password == loginGet.get('password'):
+                return True
+        return False
+
+
+# ------------------------------------------------------------------------------
+
+class MusicsDB:
+    def __init__(self):
+        self.__allMusics = []
+        self.__userMUsics = []
+        
+        self.load()
+
+    def getAllMusics(self):
+        return self.__allMusics
+    
+    def getUserMusic(self, us):
+        for music in self.__userMUsics:
+            if music['user'] == us:
+                return music['musics']
+        
+        return ""
+    
+    def load(self):
+        with open("app/controllers/db/allMusics.json", "r") as file:
+            self.__allMusics = json.load(file)
+        
+        with open("app/controllers/db/userMusics.json", "r") as file:
+            self.__userMUsics = json.load(file)
+         
+            
+        
