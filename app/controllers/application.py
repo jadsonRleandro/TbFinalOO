@@ -1,7 +1,7 @@
-from app.controllers.datarecord import UserRecord, MessageRecord, dataBase, MusicsDB
+from app.controllers.datarecord import dataBase, MusicsDB
 from bottle import template, redirect, request, response, Bottle, static_file
 import socketio
-
+from json import dumps
 
 class Application:
 
@@ -13,16 +13,16 @@ class Application:
             'newUser': self.newUser,
             'menu': self.menu,
             'remove': self.remove,
-            'logado': self.logado
+            'logado': self.logado,
+            'admin': self.admin
         }
-        self.__users = UserRecord()
-        self.__messages = MessageRecord()
         self.__musics = MusicsDB()
 
         self.edited = None
         self.removed = None
         self.created= None
         self.__alteticatedUser = None
+        self.__permisionADM = True 
 
         # Initialize Bottle app
         self.app = Bottle()
@@ -30,8 +30,7 @@ class Application:
 
         # Initialize Socket.IO server
         self.sio = socketio.Server(async_mode='eventlet')
-        self.setup_websocket_events()
-
+        
         # Create WSGI app
         self.wsgi_app = socketio.WSGIApp(self.sio, self.app)
 
@@ -69,15 +68,50 @@ class Application:
         def login_getter():
             return self.render('login')
 
-        @self.app.route('/login', method='POST')
-        def login_action():
-            username = request.forms.get('username')
-            return self.render('newUser', username)
-        
         @self.app.route('/remove', method='GET')
         def remove_getter():
-            __userName = "teste"
-            return self.render('remove', __userName)
+            return self.render('remove', self.__alteticatedUser)
+        
+        @self.app.route('/remove', method='POST')
+        def remove_action():
+            musicsToRemove = request.json
+            response.content_type = 'application/json'
+
+            for music in musicsToRemove:
+                self.__musics.removeMusic(music, "private")
+            return self.__musics.getUserMusicString(self.__alteticatedUser)    
+            
+
+        @self.app.route('/permision', method='GET')
+        def get_permision():
+            return dumps(self.__permisionADM)
+
+        @self.app.route('/admin', method='GET')
+        def admin_getter():
+            return self.render('admin')
+        
+        @self.app.route('/admin', method='POST')
+        def admin_action():
+            act = request.json['paramet']
+            file = request.json['data']
+            
+            response.content_type = 'application/json'
+
+            match act:
+                case 'setAdmin':
+                    dataBase.setAdmin(file)
+                    return dumps(True)
+                
+                case 'removeUser':
+                    self.__musics.removeUser(file)
+                    return dumps(dataBase.removeUser(file))
+                
+                case 'removeMusic':
+                    for music in file:
+                        self.__musics.removeMusic(music, "public")
+                    return dumps(True)
+            return
+            
         
         @self.app.route('/login', method='POST')
         def login_action():
@@ -98,7 +132,7 @@ class Application:
                 return self.render('logado', username)
         
         @self.app.route('/menu', method='GET')
-        def remove_getter():
+        def menu_getter():
             return self.render('menu')
         
 
@@ -122,13 +156,16 @@ class Application:
         else:
             return template('app/views/html/teste', username = parameter)
         
-    def login(self, text = None):
-        return template('app/views/html/login', username = text)
+    def login(self):
+        return template('app/views/html/login')
 
 
     def logado(self, user):
         allmusics = self.__musics.getAllMusics()
         userMusic = self.__musics.getUserMusic(user)
+        self.__permisionADM = dataBase.verPermisions(user)
+        dataBase.connected(user)
+        print('permision', self.__permisionADM)
         return template('app/views/html/menu', username = user, allmusics = allmusics, userMusic = userMusic)
     
     def remove(self,user):
@@ -140,52 +177,10 @@ class Application:
         userMusic = self.__musics.getUserMusic(self.__alteticatedUser)
         return template('app/views/html/menu', username = self.__alteticatedUser, allmusics = allmusics, userMusic = userMusic)
 
-
-    # Websocket:
-    def setup_websocket_events(self):
-
-        @self.sio.event
-        async def connect(sid, environ):
-            print(f'Client connected: {sid}')
-            self.sio.emit('connected', {'data': 'Connected'}, room=sid)
-
-        @self.sio.event
-        async def disconnect(sid):
-            print(f'Client disconnected: {sid}')
-
-        # recebimento de solicitação de cliente para atualização das mensagens
-        @self.sio.event
-        def message(sid, data):
-            objdata = self.newMessage(data)
-            self.sio.emit('message', {'content': objdata.content, 'username': objdata.username})
-
-        # solicitação para atualização da lista de usuários conectados. Quem faz
-        # esta solicitação é o próprio controlador. Ver update_users_list()
-        @self.sio.event
-        def update_users_event(sid, data):
-            self.sio.emit('update_users_event', {'content': data})
-
-        # solicitação para atualização da lista de usuários conectados. Quem faz
-        # esta solicitação é o próprio controlador. Ver update_users_list()
-        @self.sio.event
-        def update_account_event(sid, data):
-            self.sio.emit('update_account_event', {'content': data})
-
-    # este método permite que o controller se comunique diretamente com todos
-    # os clientes conectados. Sempre que algum usuários LOGAR ou DESLOGAR
-    # este método vai forçar esta atualização em todos os CHATS ativos. Este
-    # método é chamado sempre que a rota ''
-    def update_users_list(self):
-        print('Atualizando a lista de usuários conectados...')
-        users = self.__users.getAuthenticatedUsers()
-        users_list = [{'username': user.username} for user in users.values()]
-        self.sio.emit('update_users_event', {'users': users_list})
-
-    # este método permite que o controller se comunique diretamente com todos
-    # os clientes conectados. Sempre que algum usuários se removerem
-    # este método vai comunicar todos os Administradores ativos.
-    def update_account_list(self):
-        print('Atualizando a lista de usuários cadastrados...')
-        users = self.__users.getUserAccounts()
-        users_list = [{'username': user.username} for user in users]
-        self.sio.emit('update_account_event', {'accounts': users_list})
+    def admin(self):
+        if self.__permisionADM == True:
+            allmusics = self.__musics.getAllMusics()
+            users = dataBase.getUsers()
+            return template(('app/views/html/admin'), musics = allmusics, users = users)
+        else:
+            return dumps("Usuario Não tem permisão")

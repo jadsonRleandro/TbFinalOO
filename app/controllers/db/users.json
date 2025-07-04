@@ -1,14 +1,20 @@
 [
     {
         "name": "teste",
-        "password": "1234567"
+        "password": "1234567",
+        "admin": true,
+        "connected": false
     },
     {
-        "name": "dasdasd",
-        "password": "1234567"
+        "name": "slaa",
+        "password": "1234567",
+        "admin": true,
+        "connected": false
     },
     {
-        "name": "slas",
-        "password": "1234567"
+        "name": "teste2",
+        "password": "1234567",
+        "admin": false,
+        "connected": false
     }
 ]

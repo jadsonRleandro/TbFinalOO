@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Remove</title>
     <link rel="stylesheet" href="/static/css/remove.css">
 </head>
 
 <body>
     <form action="/menu" method="get" id="options">
         <img onclick="returnToMenu()" src="/static/assets/arrow.png" id="backToMenu">
-        <img onclick="rm()" src="/static/assets/trash.png" id = "trash">
+        <img onclick="confirmRemove('open')"  src="/static/assets/trash.png" id = "trash">
     </form>
 
     <div id = 'musicsContainer'>
@@ -25,9 +25,14 @@
                 </div>
             </div>
         % end
-            
-
     </div>
+
+    <div id = "confirm">
+        <img onclick="confirmRemove('close')" src="/static/assets/xIcon.png">
+        <p>CERTEZA QUE DESEJA REMOVER AS MUSICAS SELECIONADAS?</p>
+        <input onclick="rm()" id = "btn" type="button" value="CONFIRMAR">
+    </div>
+
     <script src="/static/js/remove.js"></script>
 </body>
 

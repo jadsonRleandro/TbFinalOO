@@ -1,4 +1,5 @@
 // load inicial
+const username = document.getElementById('username').innerHTML
 
 document.body.style.overflow = "hidden"
 
@@ -20,9 +21,9 @@ const playIcon = "/static/assets/playIcon.png"
 function play(self) {
     child = self.children[0]
 
-    if (actMusic != '' && actMusic != child){
+    if (actMusic != '' && actMusic != child) {
         actMusic.src = playIcon
-        actMusic.className = 'playIcon' 
+        actMusic.className = 'playIcon'
     }
 
     actMusic = child
@@ -45,15 +46,22 @@ function play(self) {
 
 let menuGui = 0
 
-function openMenu(){
+function openMenu() {
     const menu = document.getElementById('menu')
-    if (menuGui == 0){
-        menuGui = 1
-        menu.style = "height: 100vh; width: 40%;"
-        menu.innerHTML = `        
+    let permision
+
+    fetch('/permision', {
+        method: 'get'
+    }).then(response => response.json())
+        .then(data => {
+            permision = data
+            if (menuGui == 0) {
+                menuGui = 1
+                menu.style = "height: 100vh; width: 40%;"
+                menu.innerHTML = `        
         <div id="userInfos">
             <input onclick="openMenu()" type="button" id="avatar" src="">
-            <h1 id="username">Usuario</h1>
+            <h1 id="username">`+ username + `</h1>
         </div>
         <br>
         <br>
@@ -63,11 +71,19 @@ function openMenu(){
         <div class="menuOption">Conta</div>
 
         <h2 id="logout">LOGOUT<img src="./static/assets/exitIcon.png"></h2>`
-    }else{
-        menuGui = 0
-        menu.innerHTML = ''
-        menu.style = "height: 0px; width:0px"
-    }
+
+                if (permision) {
+                    console.log(permision)
+                    menu.innerHTML += `<form onclick = "submitForm(this)" action = "/admin" method = "get" class="menuOption">Admin</form>`
+                }
+
+            } else {
+                menuGui = 0
+                menu.innerHTML = ''
+                menu.style = "height: 0px; width:0px"
+            }
+        })
+        .catch(error => console.error('Erro:', error))
 }
 
 
@@ -75,25 +91,25 @@ function openMenu(){
 
 window.onload = getMusic()
 
-function getMusic(){
+function getMusic() {
     pbMusic = []
     pvMusic = []
     const publicMusics = document.getElementsByClassName('public')
     const privateMusics = document.getElementsByClassName('private')
-    
-    for(let i = 0; i < publicMusics.length; i++){
+
+    for (let i = 0; i < publicMusics.length; i++) {
         pbMusic.push(publicMusics[i].outerHTML)
     }
-    for(let i = 0; i < privateMusics.length; i++){
+    for (let i = 0; i < privateMusics.length; i++) {
         pvMusic.push(privateMusics[i].outerHTML)
     }
 
     tradeMusics(pvMusic)
 }
 
-function selectOpiton(option){
+function selectOpiton(option) {
     const options = document.getElementById('options').children
-    switch (option){
+    switch (option) {
         case 'pv':
             options[0].classList = 'select'
             options[1].classList = ''
@@ -103,18 +119,27 @@ function selectOpiton(option){
             options[1].classList = 'select'
             options[0].classList = ''
             tradeMusics(pbMusic)
-        
+
     }
 }
 
-function tradeMusics(dataBase){
+function tradeMusics(dataBase) {
     const musicContainer = document.getElementById('musicsContainer')
     musicContainer.innerHTML = ''
-    for(let i = 0; i < dataBase.length; i++){
+    for (let i = 0; i < dataBase.length; i++) {
         musicContainer.innerHTML += dataBase[i]
-    }    
+    }
 }
 
-function submitForm(element){
+function submitForm(element) {
     element.submit()
 }
+
+document.getElementById('search').addEventListener('input', function () {
+    const users = document.querySelectorAll('.musics');
+
+    users.forEach(userDiv => {
+        const txt = userDiv.querySelector(".musicName").textContent.toLowerCase();
+        userDiv.style.display = txt.includes(this.value) ? '' : 'none';
+    });
+});

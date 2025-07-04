@@ -1,18 +1,16 @@
 [
     {
         "user": "teste",
-        "musics": 
-        [
+        "musics": [
             {
-                "name": "musica do usuario",
+                "name": "musica do outro",
                 "artist": "um alguem"
             }
         ]
     },
     {
-        "user": "sla",
-        "musics": 
-        [
+        "user": "slaa",
+        "musics": [
             {
                 "name": "musica do outro",
                 "artist": "um alguem"

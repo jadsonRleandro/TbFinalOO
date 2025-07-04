@@ -29,42 +29,43 @@
     </div>
     <input id="search" type="text" placeholder="Pesquisar">
 
-    <div id = 'musicsContainer'>
+    <div id='musicsContainer'>
         % for music in allmusics:
-            <div class="musics public">
-                <img class="musicImg">
-                <div class="musicInfos">
-                    <p class="musicName">{{music['name']}}</p>
-                    <p class="artist">{{music['artist']}}</p>
-                </div>
-                <div onclick="play(this)" class="playBtn"><img class="playIcon" src="/static/assets/playIcon.png"></div>
+        <div class="musics public">
+            <img class="musicImg">
+            <div class="musicInfos">
+                <p class="musicName">{{music['name']}}</p>
+                <p class="artist">{{music['artist']}}</p>
             </div>
+            <div onclick="play(this)" class="playBtn"><img class="playIcon" src="/static/assets/playIcon.png"></div>
+        </div>
         % end
         % for music in userMusic:
-            <div class="musics private">
-                <img class="musicImg">
-                <div class="musicInfos">
-                    <p class="musicName">{{music['name']}}</p>
-                    <p class="artist">{{music['artist']}}</p>
-                </div>
-                <div onclick="play(this)" class="playBtn"><img class="playIcon" src="/static/assets/playIcon.png"></div>
+        <div class="musics private">
+            <img class="musicImg">
+            <div class="musicInfos">
+                <p class="musicName">{{music['name']}}</p>
+                <p class="artist">{{music['artist']}}</p>
             </div>
+            <div onclick="play(this)" class="playBtn"><img class="playIcon" src="/static/assets/playIcon.png"></div>
+        </div>
         % end
     </div>
-    <div id="footer">
-        <div id="actMusicInfos">
-            <p class="musicName">Nome da Musica</p>
-            <p class="artist">nome do artista</p>
-        </div>
-        <div id="controllers">
-            <input type="button" class="arrows rotate180">
-            <div onclick="play(this)" class="playBtn">
-                <img id="actBtn" class="playIcon" src="/static/assets/playIcon.png">
+    <form  onclick="submit()" action="/login" method="get">
+        <div id="footer">
+            <div id="actMusicInfos">
+                <p class="musicName">Nome da Musica</p>
+                <p class="artist">nome do artista</p>
             </div>
-            <input type="button" class="arrows">
+            <div id="controllers">
+                <input type="button" class="arrows rotate180">
+                <div onclick="play(this)" class="playBtn">
+                    <img id="actBtn" class="playIcon" src="/static/assets/playIcon.png">
+                </div>
+                <input type="button" class="arrows">
+            </div>
         </div>
-    </div>
-
+    </form>
     <script src="/static/js/menu.js"></script>
 </body>
 

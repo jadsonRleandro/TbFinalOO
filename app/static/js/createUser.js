@@ -5,11 +5,11 @@ function validation() {
 
     let verification = 0;
 
-    if (user.value === '' || password.value === '' || confPassword.value === '') {
+    if (user.value =='' || password.value == '' || confPassword.value == '') {
         alert('Preencha todos os campos.');
         verification = 1;
     } else {
-        if (password.value !== confPassword.value) {
+        if (password.value != confPassword.value) {
             alert('As senhas estão diferentes.');
             verification = 1;
         }
@@ -25,7 +25,7 @@ function validation() {
         }
     }
 
-    if (verification === 0) {
+    if (verification == 0) {
         let form = document.getElementById('container')
         form.submit()
     }

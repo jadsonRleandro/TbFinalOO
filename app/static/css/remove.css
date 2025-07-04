@@ -96,3 +96,48 @@ body{
     opacity: 90%;
     cursor: pointer;
 }
+
+#confirm{
+    background-color: black;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 20px;
+    border-radius: 20px;
+    display: none;
+}
+
+#confirm p{
+    margin: 50px;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+#confirm input{
+    background: #00FF62;
+    background: linear-gradient(138deg, rgba(0, 255, 98, 1) 0%, rgba(0, 240, 255, 1) 100%);
+    color: white;
+    font-size: 1.5em;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    display: block;
+    margin: auto;
+}
+
+#confirm input:hover{
+    opacity: 90%;
+    cursor: pointer;
+}
+
+#confirm img{
+    height: 20px;
+    margin: 20px;
+    margin-bottom: 0;
+}
+
+#confirm img:hover{
+    opacity: 90%;
+    cursor: pointer;
+}
