@@ -1,0 +1,143 @@
+body{
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(58, 58, 58, 1) 72%, rgba(59, 58, 58, 1) 100%);
+    margin: 0;
+    padding: 0;
+    color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color:rgb(32, 32, 32);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    height: calc(100vh);
+}
+
+#options{
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+#backToMenu{
+    rotate: 180deg;
+    height: 45px;
+}
+
+#backToMenu:hover{
+    opacity: 90%;
+    cursor: pointer;
+}
+
+#trash{
+    height: 45px;
+    float: right;
+}
+
+#trash:hover{
+    opacity: 90%;
+    cursor: pointer;
+}
+
+
+.musics{
+    border: 2px solid white;
+    border-left: none;
+    border-right: none;
+    padding: 0px;
+    box-sizing: border-box;
+    padding-bottom: 0;
+    display: grid;
+    grid-template: auto / 100px auto auto;
+    align-items: center;
+    padding: 10px;
+    padding-right: 20px;
+}
+
+.musicImg{
+    width: 90px;
+    height: 90px;
+    background-color: white;
+    margin: 0px;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+.musicInfos{
+    justify-self: end;
+    display: inline-block;
+    margin: 0;
+}
+
+
+.artist{
+    font-size: 15px;
+    color: rgb(167, 167, 167);
+}
+
+.square{
+    height: 50px;
+    width: 50px;
+    border: 2px solid white;
+    border-radius: 10px;
+    justify-self: center;
+}
+
+.select{
+    background: #00FF62;
+    background: url(/static/assets/xIcon.png), linear-gradient(138deg, rgba(0, 255, 98, 1) 0%, rgba(0, 240, 255, 1) 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.square:hover{
+    opacity: 90%;
+    cursor: pointer;
+}
+
+#confirm{
+    background-color: black;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 20px;
+    border-radius: 20px;
+    display: none;
+}
+
+#confirm p{
+    margin: 50px;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+#confirm input{
+    background: #00FF62;
+    background: linear-gradient(138deg, rgba(0, 255, 98, 1) 0%, rgba(0, 240, 255, 1) 100%);
+    color: white;
+    font-size: 1.5em;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    display: block;
+    margin: auto;
+}
+
+#confirm input:hover{
+    opacity: 90%;
+    cursor: pointer;
+}
+
+#confirm img{
+    height: 20px;
+    margin: 20px;
+    margin-bottom: 0;
+}
+
+#confirm img:hover{
+    opacity: 90%;
+    cursor: pointer;
+}

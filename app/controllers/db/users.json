@@ -1,0 +1,16 @@
+[
+    {
+        "name": "legin",
+        "password": "1234567",
+        "admin": false,
+        "connected": false,
+        "foto": "/static/assets/photo_profile/photo1.png"
+    },
+    {
+        "name": "teste",
+        "password": "1234567",
+        "admin": true,
+        "connected": true,
+        "foto": "/static/assets/photo_profile/photo1.png"
+    }
+]

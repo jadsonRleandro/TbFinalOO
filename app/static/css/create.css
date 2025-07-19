@@ -1,0 +1,20 @@
+
+#mensageStyle{
+    color: white;
+    width: 100vw;
+    position: absolute;
+    margin: auto;
+    text-align: center;
+    font-size: 30px;
+    top: 10%;
+    animation: mensageAnimation 2s forwards;
+}
+
+@keyframes mensageAnimation {
+    0%{
+        opacity: 100%;
+    }
+    100%{
+        opacity: 0%;
+    }
+}

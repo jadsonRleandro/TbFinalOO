@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+    <link rel="stylesheet" href="/static/css/formstemplate.css">
+    <link rel="stylesheet" href="/static/css/create.css">
+</head>
+
+<body>
+    <h2 id = 'mensageStyle'>{{mensage}}</h2>
+    <form action="/create" method="post" id="container">
+        <div>
+            <p>Usuario</p>
+            <input id="username" name="username" class="inputs" type="text">
+        </div>
+        <div>
+            <p>Senha</p>
+            <input id="password" name="password" class="inputs" type="password">
+        </div>
+        <div>
+            <p>Confirmar Senha</p>
+            <input id="checkpassword" name="checkpassword" class="inputs" type="password">
+        </div>
+        <a href="/login">Fazer login</a>
+
+        <input value="Criar" class="submit" onclick="validation()" type="button">
+    </form>
+        <div class="conjbar bdown">
+        </div>
+        <div class="conjbar">
+        </div>
+        <script src="/static/js/bars.js"></script>
+        <script src="/static/js/createUser.js"></script>
+</body>
+
+</html>

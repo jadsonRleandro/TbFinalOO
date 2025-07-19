@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Conta</title>
+    <link rel="stylesheet" href="/static/css/myAccount.css">
+</head>
+<body>
+    <form action="/menu" method="get" id="retornarMenu">
+        <img onclick="returnMenu()" src="/static/assets/voltar.png" id="voltar">
+    </form>
+    <p id="vUser">{{mensagem}}</p>
+    <div class="container">
+        <div id="container-background">
+            <div id="usuario-thumb">
+                <img src="{{foto}}" id="photo" alt="photo-thumb">
+                <p id="username">{{username}}</p>
+            </div>
+            <form action="/conta/changeUsername/" method="post" id="trocar-user">
+                <p>Trocar username:</p>
+                <input id="texto" name="usuario" type="text" placeholder="Trocar username">
+                <button id="change" type="button" onclick="trocaruser(event)">Trocar</button>
+            </form>
+            <div id="thumbs-profile">
+                <p id="text-profile">Foto de perfil:</p>
+                <form action="/conta/changePhoto/" id="change-photo" method="post">
+                    <input type="hidden" name="photo" id="photoInput" value="">
+                    % for thumb in allthumbs:
+                        <div class="thumb-itens">
+                            <img class="thumbImg" name="photo" src="{{thumb['foto']}}" onclick="changeFoto(this)">
+                        </div>
+                    % end
+                </form>
+            </div>
+            <div id="password-all">
+                <p>Senha:</p>
+                <div id="password">{{password}}</div>
+                <img src="/static/assets/hide.png" id="botao-toggle" onclick="showHide()">
+            </div>
+            <form action="/conta" method="post" id="conta-delete" onsubmit="return confirm('Tem certeza que deseja deletar sua conta?')">
+                <input value="Deletar Conta" id="deletar-conta" type="submit">
+            </form>
+        </div>
+    </div>
+    <script src="/static/js/myAccountScript.js"></script>
+    <script src="/static/js/changeuser.js"></script>
+</body>
+</html>

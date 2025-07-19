@@ -1,0 +1,198 @@
+/* Fundo e layout do corpo */
+body {
+    background: #000000;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(58, 58, 58, 1) 72%, rgba(59, 58, 58, 1) 100%);
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Container do player */
+#container {
+    background-color: white;
+    display: grid;
+    max-width: 259px;
+    max-height: 254px;
+    height: auto; /* Ajuste para melhor adaptação */
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px; /* Adicionando bordas arredondadas */
+}
+
+/* Foto do usuário (thumb) */
+#thumb-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    position: absolute;
+    background-color: white;
+    top: -50px; /* Ajustando posição para melhor centralização */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Título da música e do artista */
+#nome-da-musica {
+    text-align: center;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px; /* Ajuste de fonte */
+    margin-top: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#nome-do-artista {
+    color: gray;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* Botão de voltar */
+.teste {
+    width: 30px;
+    position: absolute;
+    left: 30px;
+    top: 20px;
+}
+
+/* Controle do player */
+#player-music {
+    position: relative;
+    top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#bola-music {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(138deg, rgba(0, 255, 98, 1) 0%, rgba(0, 240, 255, 1) 100%);
+    border-radius: 50%;
+    position: absolute;
+    top: -40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#play-music,
+#next-music,
+#next-music-2 {
+    cursor: pointer;
+    position: absolute;
+    top: -60px;
+}
+
+#play-music {
+    width: 74px;
+    left: 85px;
+}
+
+#next-music {
+    width: 70px;
+    left: 170px;
+}
+
+#next-music-2 {
+    width: 70px;
+    left: 0;
+    transform: scaleX(-1);
+}
+
+.volume {
+    position: relative;
+    top: 15px;
+    left: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80px;
+}
+
+.volume i {
+    color: white;
+}
+
+.volumeSlider {
+    width: 100%;
+    margin: 0 10px;
+}
+
+/* Controles de tempo e barra de progresso */
+.musicTimer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.musicTimer span {
+    color: white;
+    font-size: 12px;
+}
+
+/* Barra de progresso */
+.progressBar {
+    height: 12px;
+    background: white;
+    border-radius: 7px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.progress {
+    height: 12px;
+    background: linear-gradient(138deg, rgba(0, 255, 98, 1) 0%, rgba(0, 240, 255, 1) 100%);
+    border-radius: 7px;
+    width: 0%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Barra de navegação */
+.conjbar {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: #333;
+}
+
+.bdown {
+    top: calc(100vh - 4px);
+}
+
+/* Responsividade para dispositivos menores */
+@media (max-width: 768px) {
+    #container {
+        max-width: 300px;
+        padding: 15px;
+    }
+
+    #nome-da-musica {
+        font-size: 18px;
+    }
+
+    .volume {
+        left: 180px;
+    }
+
+    .musicTimer {
+        flex-direction: column;
+        margin-top: 8px;
+    }
+
+    .volumeSlider {
+        width: 70px;
+    }
+}

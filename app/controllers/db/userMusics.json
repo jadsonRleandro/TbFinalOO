@@ -1,0 +1,30 @@
+[
+    {
+        "user": "legin",
+        "musics": [
+            {
+                "name": "Bilie Eilish Birds Of a Feather",
+                "artist": "Billie Eilish",
+                "path": "Bilie-Eilish-Birds-Of-a-Feather.mp3",
+                "thumb": "static/assets/thumb/boy.png"
+            }
+        ]
+    },
+    {
+        "user": "teste",
+        "musics": [
+            {
+                "name": "505 Arctic Monkeys TraducaoLetra",
+                "artist": "Artick Monkeys",
+                "path": "505-Arctic-Monkeys-TraducaoLetra.mp3",
+                "thumb": "static/assets/thumb/505.jpeg"
+            },
+            {
+                "name": "PRIDE.",
+                "artist": "Kendrick Lamar",
+                "path": "PRIDE..mp3",
+                "thumb": "static/assets/thumb/ab67616d0000b2738b52c6b9bc4e43d873869699.jpeg"
+            }
+        ]
+    }
+]

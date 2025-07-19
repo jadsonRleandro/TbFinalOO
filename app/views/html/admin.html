@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link href="/static/css/admin.css" rel="stylesheet">
+    <script src="/static/js/websocket/socket.io.min.js"></script>
+</head>
+
+<body>
+    <form action="/menu" method="get"><img onclick="submit()" src="/static/assets/arrow.png" id="backToMenu"></form>
+    <div id="container">
+        <div id="teste" class="divs" id="conectedUsers">
+            <h2 onclick="expand(this)">Conectados</h2>
+            <div>
+                <ul id = "connecteds">
+                    % for us in users:
+                        % if us['connected']:
+                            %if not us['admin']:
+                                <li>{{us['name']}}</li>
+                            %else:
+                                <li class="adm">{{us['name']}}</li>
+                            % end
+                        % end
+                    % end
+                </ul>
+            </div>
+        </div>
+        <div class="divs" id="publicMusics">
+            <h2 onclick="expand(this)">Musicas</h2>
+
+            <div>
+                <img onclick="removeMusic()" src="/static/assets/trash.png" id="trashAdmin">
+                <div>
+                    % for music in musics:
+                    <div class="musics">
+                        <div onclick="select(this)" class="square"></div>
+                        <img class="musicImg" src="{{music['thumb']}}">
+                        <div class="musicInfos">
+                            <p class="musicName">{{music['name']}}</p>
+                            <p class="artist">{{music['artist']}}</p>
+                        </div>
+                    </div>
+                    % end
+                </div>
+            </div>
+        </div>
+
+        <div class="divs" id="users">
+            <h2 onclick="expand(this)">Usuarios</h2>
+            <div>
+                <input id="search" type="text" placeholder="Pesquisar">
+                <div id = "allUsers" style="border-top: 1px solid white;">
+                    % for us in users:
+                    <div onclick="selectUser(this)" class="us">
+                        <p class = "username">{{us['name']}}</p>
+                        % if not us['admin']:
+                            <p>user</p>
+                        % else:
+                            <p>admin</p>
+                        % end
+                        % if not us['connected']:
+                            <p class="connectedUser" style="color: rgb(255, 114, 114);">desconectado</p>
+                        %else:
+                            <p class="connectedUser" style="color: rgb(191, 250, 103);">conectado</p>
+                        % end
+                    </div>
+                    % end
+                </div>
+                <div id="options">
+                    <h3 onclick="removerUser()" style="color: red; border-right: 1px solid white;">Remover</h3>
+                    <h3 onclick="setAdmin()" style="color: greenyellow;">Admin</h3>
+                </div>
+            </div>
+        </div>
+
+        <div id="open">
+            <img id="close" onclick="expand('close')" src="/static/assets/xIcon.png">
+            <h2 id="openTitle">NONE</h2>
+            <div id="elements"></div>
+        </div>
+    </div>
+
+    <script src="/static/js/admin.js"></script>
+</body>
+
+</html>

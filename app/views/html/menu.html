@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>menu</title>
+    <link rel="stylesheet" href="/static/css/menu.css">
+    <script src="/static/js/websocket/socket.io.min.js"></script>
+</head>
+
+<body>
+    <div id="load">
+        <h1>Bem Vindo</h1>
+        <h1>{{username}}</h1>
+    </div>
+
+
+    <div id='menu'>
+    </div>
+
+
+    <div id="userInfos">
+        <img onclick="openMenu()" type="button" id="avatar" src="{{foto}}" alt="avatar">
+        <h1 id="username">{{username}}</h1>
+    </div>
+    <div id="options">
+        <p onclick="selectOpiton('pv', this)" class="select" id="">Privado</p>
+        <p onclick="selectOpiton('pb', this)">Publico</p>
+    </div>
+    <input id="search" type="text" placeholder="Pesquisar">
+
+    <form action="/player" method="POST" id="menuPlayerteste">
+    <div id='musicsContainer'>
+        % for music in allmusics:
+        <div id="{{music['name']}}" class="musics public">
+            <img class="musicImg" src="{{music['thumb']}}" onclick="verifythisform(this)">
+            <div class="musicInfos">
+                <p class="musicName">{{music['name']}}</p>
+                <p class="artist">{{music['artist']}}</p>
+            </div>
+            <div onclick="play(this)" class="playBtn"><img class="playIcon" src="/static/assets/playIcon.png"></div>
+        </div>
+        % end
+        <form action="/menu/player" method="get" id="musicForm">
+            <input type="hidden" name="musicName" id="musicNameInput" value="">
+        </form>
+        % for music in userMusic:
+        <div id="{{music['name']}}" class="musics private">
+            <img class="musicImg" src="{{music['thumb']}}" onclick="verifythisform(this)">
+            <div class="musicInfos">
+                <p class="musicName">{{music['name']}}</p>
+                <p class="artist">{{music['artist']}}</p>
+            </div>
+            <div onclick="play(this)" class="playBtn"><img class="playIcon" src="/static/assets/playIcon.png"></div>
+        </div>
+        % end
+    </form>
+    </div>
+    <div>
+        <div id="footer">
+            
+        </div>
+    </div>
+    <script src="/static/js/menu.js"></script>
+    <script src="/static/js/menuChoice.js"></script>
+</body>
+
+</html>

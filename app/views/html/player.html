@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mudar Música</title>
+    <link rel="stylesheet" href="/static/css/choiceMusic.css" />
+    <link rel="stylesheet" href="/static/css/bars.css" />
+</head>
+
+<body>
+    <div hidden id="hidden">{{path}}</div>
+    <a href="/menu" aria-label="Voltar para o menu">
+        <img class="teste" src="/static/assets/voltar.png" alt="Ícone de voltar" />
+    </a>
+
+    <div id="container">
+        <div id="userinfo">
+            <img src="{{thumb}}" id="thumb-photo" alt="photo-thumb">
+            <div id="nome-da-musica">
+                {{musica}}
+                <div id="nome-do-artista">{{artist}}</div>
+            </div>
+        </div>
+        <div id="container-bar">
+            <div class="progressBar">
+                <div class="progress"></div>
+            </div>
+            <div class="musicTimer">
+                <span class="currentTime">00:00</span>
+                <span class="duration">00:00</span>
+            </div>
+        </div>
+        <audio id="musicAudio" src="{{path}}"></audio>
+        <div id="player-music">
+            <div id="bola-music"></div>
+            <img class="play-music" onclick="tradeBtn(this)" class="playIcon" src="/static/assets/playIcon.png" />
+            <form action="/player/next" method="POST" id="nextPlayerMusic">
+                <div hidden id="hidden">{{path}}</div>
+                <img id="next-music" onclick="nextMusic(this)"
+                    src="/static/assets/-_Next-Arrow-Media-Skip-Music-Move-512.png" alt="Próxima música" />
+            </form>
+            <form action="/player/back" method="POST" id="backPlayerMusic">
+                <div hidden id="hidden">{{path}}</div>
+                <img id="next-music-2" onclick="backMusic(this)"
+                    src="/static/assets/-_Next-Arrow-Media-Skip-Music-Move-512.png" alt="Avançar faixa" />
+            </form>
+        </div>
+        <div class="volume">
+            <i class="ph ph-speaker-none"></i>
+            <input type="range" min="0" max="100" value="30" class="volumeSlider">
+            <i class="ph ph-speaker-high"></i>
+        </div>
+    </div>
+
+    <div class="conjbar bdown"></div>
+    <div class="conjbar"></div>
+
+    <script src="/static/js/barsChoiceMusic.js"></script>
+    <script src="/static/js/choiceMusic.js"></script>
+    <script>
+        function nextMusic(img) {
+            const form = img.closest('form');
+            if (!form) return alert('Formulário não encontrado.');
+
+            // Pega o nome da música dentro da mesma div .musics
+            const name = img.closest('.musics').querySelector('.musicName').textContent.trim();
+
+            // Remove input antigo se existir
+            const old = form.querySelector('input[name="music_name"]');
+            if (old) old.remove();
+
+            // Cria input hidden com o nome da música
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'music_name';
+            input.value = name;
+            form.appendChild(input);
+
+            form.submit();
+        }
+
+
+        function backMusic(img) {
+            const form = img.closest('form');
+            if (!form) return alert('Formulário não encontrado.');
+
+            // Pega o nome da música dentro da mesma div .musics
+            const name = img.closest('.musics').querySelector('.musicName').textContent.trim();
+
+            // Remove input antigo se existir
+            const old = form.querySelector('input[name="music_name"]');
+            if (old) old.remove();
+
+            // Cria input hidden com o nome da música
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'music_name';
+            input.value = name;
+            form.appendChild(input);
+
+            form.submit();
+        }
+
+    </script>
+</body>
+
+</html>

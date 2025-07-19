@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>Gerenciador de MP3 (com Upload)</title>
+    <link rel="stylesheet" href="/static/css/adicionarMusica.css">
+</head>
+
+<body>
+    <form action="/menu" method="get" id="options">
+        <img onclick="returnToMenu()" src="/static/assets/arrow.png" id="backToMenu">
+    </form>
+    <div id="container-first">
+        <div id="container-background">
+            <div id="username-info">
+                <img id="avatar" src="{{foto}}" alt="avatar">
+                <p id="username">{{username}}</p>
+            </div>
+            <div id="mensagens">
+                <p id="mensagem-cor2">{{mensage}}</p>
+                <p id="mensagem-cor">{{mensagem2}}</p>
+            </div>
+            <div id="top-adicionar">
+                <h1 id="gerenciador">Faça Upload</h1>
+                <form action="/adicionarMusicas" method="POST" enctype="multipart/form-data" id="container">
+                    <div id="filecontainer">
+                        <input type="file" id="fileInput" name="file" accept=".mp3">
+                        <p id="addM">Adicione a música:</p>
+                    </div>
+                    <div id="thumbcontainer">
+                        <input type="file" id="thumb" name="thumb-music" accept=".jpg, .jpeg, .png">
+                        <p id="addT">Adicione a thumb:</p>
+                    </div>
+                    <div id="checkcontainer">
+                        <input type="checkbox" name="privado-check" id="privado-check" value="true">
+                        <p id="boxAdd">Marque a caixa para deixar pública:</p>
+                    </div>
+                    <div id="artistacontainer">
+                        <input type="text" name="artista" id="artista-id">
+                        <p id="addA">Nome do artista:</p>
+                    </div>
+                    <input value="Upload" class="submit" onclick="upload()" type="button">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/adicionarMusica.js"></script>
+</body>
+
+</html>

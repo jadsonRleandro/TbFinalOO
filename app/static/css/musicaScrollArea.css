@@ -1,0 +1,80 @@
+.musica-item {
+    background-color: rgb(161 126 126 / 99%);
+    height: 130px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+#thumb {
+    width: 150px;
+    height: 100px;
+}
+
+#musica-title {
+    font-size: 10px;
+    color: white;
+    position: relative;
+    text-wrap: nowrap;
+    font-family: math;
+}
+
+#musica-criador {
+    color: #e3bebe;
+    position: relative;
+    top: -10px;
+    left: 40px;
+    font-size: 10px;
+    text-wrap: nowrap;
+}
+
+#adicionar-button {
+    background-color: rgb(17, 156, 17);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    left: 186px;
+    top: -124px;
+}
+
+#adicionar-button:hover {
+    background-color: #8b7910;      /* vermelho mais escuro ao passar o mouse */
+    transform: scale(1.05);  
+}
+
+#adicionar-button:active {
+    transform: scale(0.98);
+}
+
+#remover-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    left: 192px;
+    top: -125px;
+}
+
+#remover-button:hover {
+    background-color: #c0392b;      /* vermelho mais escuro ao passar o mouse */
+    transform: scale(1.05);         /* leve aumento ao passar o mouse */
+}
+
+#remover-button:active {
+    transform: scale(0.98);         /* leve redução ao clicar */
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/css/formstemplate.css">
+</head>
+
+<body>
+    <form action="/login" method="post" id="container">
+        <div>
+            <p>Usuario</p>
+            <input id="username" name="username" class="inputs" type="text">
+        </div>
+        <div>
+            <p>Senha</p>
+            <input id="password" name="password" class="inputs" type="password">
+        </div>
+        <a href="/create">Adicionar Conta</a>
+        <input value="Login" class="submit" type="submit">
+    </form>
+    <div class="conjbar bdown">
+    </div>
+    <div class="conjbar">
+    </div>
+    <script src="/static/js/bars.js"></script>
+</body>
+
+</html>
